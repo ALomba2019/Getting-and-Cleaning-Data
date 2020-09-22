@@ -1,0 +1,56 @@
+Code book for Coursera Getting and Cleaning Data course project 'Peer-graded Assigment# Getting and Cleaning UCI HAR Dataset'
+
+See the README.md file of this repository for background information on this data set.
+
+Relevant outputs were generated with the run_analysis.R script, which performs the tasks defined in the Assignment.
+
+
+Data---------------------------------------------------------------------------------------------------------------------------
+
+Raw data downloaded and unzipped from :
+
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+UCI HAR Dataset contains two folders: train (X_train.txt, y_train.txt, subject_train.txt) and test (X_test.txt, y_test.txt, subject_test.txt)  datasets, and the following general files:
+
+
+features.txt| List of all features, with description in the UCI HAR Dataset/features_info.txt file.
+
+activities.txt| Links the class labels with their activity name.
+
+README.txt| Information on the data included in the datasets, namely transformations performed.
+
+
+Iddentifiers & variables -------------------------------------------------------------------------------------------------------
+
+subject: Subject identifier, integer, ranges from 1 to 30.
+
+activity: Activity identifier, string with 6 possible values
+
+1. WALKING
+2. WALKING_UPSTAIRS
+3. WALKING_DOWNSTAIRS
+4. SITTING
+5. STANDING
+6. LAYING
+
+
+Cleaning the data -------------------------------------------------------------------------------------------------------------
+
+The following procedures were applied to the source data:
+
+1 - Training and test data sets were merged into one dataset;
+
+2 - The measurements on the mean and standard deviation (i.e. signals containing the strings mean and std) were extracted for each measurement;
+
+3, 4 - Variable names were managed so that:
+
+--Special characters (i.e. (, ), and -) were removed;
+
+--Initial f and t were expanded to frequencyDomain and timeDomain, respectively;
+
+-- Acc, Gyro, Mag, Freq, mean, and std were replaced with Accelerometer, Gyroscope, Magnitude, Frequency, Mean, and StandardDeviation, respectively;
+
+-- Replaced BodyBody with Body;
+
+5 -From the resulting data set (4), a final tidy data set was created with the average of each variable for each activity and each subject.
