@@ -25,6 +25,8 @@ unzip(zipfile="./data/dataset.zip",exdir="./data")
 #T1.Merges the training and the test data sets to create one 
 #data set.
 
+library (dplyr)
+
 #read training data
 xtrain <- read.table("./data/UCI HAR Dataset/train/X_train.txt")
 ytrain <- read.table("./data/UCI HAR Dataset/train/y_train.txt")
@@ -80,7 +82,7 @@ MSD <- (grepl("activityId" , colNames) |
 
 fullMSD <- fulldata[ , MSD == TRUE]
 
-dim(fullMSD)
+#dim(fullMSD)
 
 
 #T3. Using descriptive activity names to name the activities in the data set
@@ -116,14 +118,19 @@ fulldataANcol <- gsub("BodyBody", "Body", fulldataANcol)
 # use new labels as column names
 colnames(fulldataAN) <- fulldataANcol
 
+#replace subjectID and activityID by subject and activity
+
+head(fulldataAN)
+
+fulldataAN<-rename(fulldataAN, activity = activityId, subject = subjectId)
+
 #T5. From T4, creating a second, independent tidy data set with 
 #the average of each variable for each activity and each subject.
 
-library (dplyr)
-
 fulldataANMean<- fulldataAN %>%
-  group_by(subjectId, activityId) %>%
+  group_by(subject, activity) %>%
   summarise_each(funs(mean))
 
 write.table(fulldataANMean, "tidydata.txt", row.names = FALSE, 
             quote = FALSE)
+
